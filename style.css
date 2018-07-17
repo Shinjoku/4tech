@@ -1,0 +1,8 @@
+html, body {
+  margin: 0 auto;
+  height: 100%;
+}
+
+input.field, textarea {
+  width: 100%;
+}
