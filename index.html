@@ -2,16 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="venturus/logo-vjobs.png">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- My files -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Mock</title>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><img src="venturus/logo-h-vjobs.png" width="128px" height="64px"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,7 +32,7 @@
   <!-- End Navbar -->
 
 
-  <div class="container">
+  <div class="container" id="container">
 
     <!-- New job -->
     <a class="btn btn-primary" data-toggle="collapse" href="#forms" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -40,53 +41,53 @@
     <div class="collapse" id="forms">
       <br>
       <div class="card card-body">
-        <form action="post" id="myForm">
+        <form id="myForm">
 
           <div class="row">
 
             <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
               Nome:
-              <input class="field" type="text" alt="Nome" placeholder="Nome do trabalho">
+              <input class="field" name="name" type="text" alt="Nome" placeholder="Nome do trabalho">
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
               Descrição:
-              <textarea class="field" placeholder="Descreva o trabalho"></textarea>
+              <textarea class="field" name="description" placeholder="Descreva o trabalho"></textarea>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-6 mb-3">
               Habilidades necessárias:
-              <textarea class="field" placeholder="Habilidades técnicas"></textarea>
+              <textarea class="field" name="habilities" placeholder="Habilidades técnicas"></textarea>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-6 mb-3">
               Diferenciais:
-              <textarea class="field" placeholder="Características peculiares"></textarea>
+              <textarea class="field" name="diferences" placeholder="Características peculiares"></textarea>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-6 mb-3">
               Salário base:
-              <textarea class="field" placeholder="Características peculiares"></textarea>
+              <textarea class="field" name="salary" placeholder="Características peculiares"></textarea>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-6 mb-3">
               Área:
-              <textarea class="field" placeholder="Área de interesse"></textarea>
+              <textarea class="field" name="area" placeholder="Área de interesse"></textarea>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-6 mb-3">
-              <input type="checkbox"></textarea>
+              <input type="checkbox" name="pcd"></textarea>
               Vaga para PCD
             </div>
           </div>
 
-          <a class="btn btn-success" style="right: 100%;" href="#">Enviar</a>
+          <a class="btn btn-success" value="submit" onclick="getJob();" href="#">Enviar</a>
         </form>
       </div>
     </div>
     <br><br>
 
-    <div class="row">
+    <div class="row" id="deck">
         <div class="card col-sm-12 col-md-6 col-lg-4 mb-3">
           <img class="card-img-top" src="./venturus/designer.png" alt="Card image cap">
           <div class="card-body">
@@ -108,7 +109,7 @@
         </div>
 
         <div class="card col-sm-12 col-md-6 col-lg-4 mb-3">
-          <img class="card-img-top" src="./venturus/designer.png" alt="Card image cap">
+          <img class="card-img-top" src="./venturus/tester.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Job One</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -125,7 +126,7 @@
           <div class="card-body">
             <h5 class="card-title">Job Two</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-sm btn-primary">Edit</a>
             <a href="#" class="btn btn-sm btn-danger">Remove</a>
           </div>
         </div>
@@ -135,17 +136,17 @@
           <div class="card-body">
             <h5 class="card-title">Job One</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-sm btn-primary">Edit</a>
             <a href="#" class="btn btn-sm btn-danger">Remove</a>
           </div>
         </div>
 
         <div class="card col-sm-12 col-md-6 col-lg-4 mb-3">
-          <img class="card-img-top" src="./venturus/developer.png" alt="Card image cap">
+          <img class="card-img-top" src="./venturus/tester.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Job Two</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-sm btn-primary">Edit</a>
             <a href="#" class="btn btn-sm btn-danger">Remove</a>
           </div>
         </div>
@@ -158,7 +159,7 @@
   <!-- Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-  <script src="script.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
   </body>
 </html>
