@@ -40,6 +40,7 @@ app.post('/vagas', async (req, res) => {
 
     let vagasLength = vagas.length;
     if(!getVaga(req.body.id)){
+      if(!validateFields(req.body)) return res.status(500).send('Dados inválidos');
       let vaga = createVaga(req.body);
       vagas.push(vaga);
       if(vagas.length > vagasLength) return res.send('Added');
@@ -59,6 +60,7 @@ app.put('/vagas/:id', async (req, res) => {
 
   try {
     if(target){
+      if(!validateFields(req.body)) return res.status(500).send('Dados inválidos');
       let vaga = createVaga(req.body);
       let i = vagas.indexOf(target);
       vagas[i] = vaga;
@@ -108,4 +110,16 @@ const getVaga = (id) => {
   }
 
   return null;
+}
+
+const validateFields = (obj) => {
+  return obj.id &&
+    obj.name &&
+    obj.description &&
+    obj.skills &&
+    obj.salary &&
+    obj.area &&
+    obj.differentials &&
+    obj.isPcd &&
+    obj.isActive
 }
