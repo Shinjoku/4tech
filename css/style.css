@@ -3,6 +3,6 @@ html, body {
   height: 100%;
 }
 
-input.field, textarea {
+.field {
   width: 100%;
 }
