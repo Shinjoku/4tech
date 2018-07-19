@@ -1,2 +1,15 @@
 --save-dev  = -D
 --save      = -s
+
+- JS vive de referências de memória.
+  Logo, a = b faz com que ao se mudar a, b também
+  será mudado. Para evitar isso, usa-se o
+  "spread operator": {...a}
+
+  https://firestore.googleapis.com/v1beta1/projects/
+  vnt4tech-teste/databases/(default)/documents/
+  pessoas?&key=AIzaSyAWId35iQHqdlHq1KiUyhd4TJoM5vtaVKg
+
+Perguntas:
+  - Quais os motivos do JavaScript funcionar
+    todo por referência?

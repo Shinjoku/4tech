@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 // Rota principal
 app.get('/', async (req, res) => {
-  return res.send(`Damn, you're on the main page!`);
+  return res.redirect('../desafio1/index.html');
 });
 
 // Rota para resgatar todas as vagas
@@ -30,6 +30,9 @@ app.get('/vagas/:id', async (req, res) => {
 
   if(target) return res.send(target);
   return res.status(500).send('ID não cadastrado');
+
+  //// Recomendado
+  // return res.send(vagas.find(el => el.id == req.params.id));
 });
 
 // POST
@@ -51,6 +54,9 @@ app.post('/vagas', async (req, res) => {
   }
 });
 
+// PUT
+
+// Atualiza uma vaga
 app.put('/vagas/:id', async (req, res) => {
   let target;
   let id = req.params.id;
@@ -70,6 +76,23 @@ app.put('/vagas/:id', async (req, res) => {
   } catch(error) {
     return res.status(500).send('Internal Error');
   }
+
+  //// Recomendado:
+  // try{
+  //   if(!req.body)
+  //     return res.status(403).send('Para alterar um usuáriom é necessário passar algum valor');
+  //
+  //   let index = await jobs.findIndex(job => job.id === req.params.id);
+  //   if(index >= 0) {
+  //     Object.keys(req.body).forEach(job => {
+  //       jobs[index][job] = req.body[job];
+  //     });
+  //     return res.send(`Vaga com o id ${req.params.id} foi alterada com sucesso`);
+  //   }
+  //   return res.send('Não foi encrontado uma vaga com esse id');
+  // }catch(error) {
+  //   return res.send('Erro interno');
+  // }
 });
 
 // Deleta um cadastro
