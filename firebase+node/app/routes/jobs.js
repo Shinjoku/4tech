@@ -1,30 +1,57 @@
 'use strict';
 
+
+const Job = require('../../model/job.js');
+
 module.exports = app => {
 
-  let jobs = require('../../config/jobs.js');
-  const Job = require('../../model/job.js');
+  const jobsCollection = app.config.firebaseConfig.collection('jobs');
 
+
+// GET
   app.get('/jobs', async (req, res) => {
-      return res.send(jobs);
+
+      try {
+
+        // Query para os jobs
+        const docs = await jobsCollection.get();
+        let jobs = [];
+
+        // Leva os jobs para um vetor que será exibido ao user
+        docs.forEach(doc => {
+          jobs.push(extractJob(doc));
+        });
+
+        return res.send(jobs);
+
+      } catch(error) {
+
+        return res.status(500).send('Error');
+      }
   });
 
   app.get('/jobs/:id', async (req, res) => {
       return res.send(jobs.find(el => el.id === req.params.id));
   });
 
+
+// POST
   app.post('/jobs', async (req, res) => {
       try {
-          let jobsLength = jobs.length;
-          let job = createJob(req.body);
-          jobs.push(job);
-          if (jobs.length > jobsLength) return res.send('Adicionado com sucesso');
-          return res.status(500).send('Ops! Aconteceu um erro tentando cadastrar a vaga.');
+
+        // Query para cadastrar o JSON recebido
+        const fbReturn = await jobsCollection.doc().set(req.body);
+
+        if (fbReturn) return res.send('Succesfully added!');
+        else throw Error;
+
       } catch (error) {
-          return res.status(500).send(error);
+          return res.status(500).send('Eroooooooow');
       }
   });
 
+
+// PUT
   app.put('/jobs/:id', async (req, res) => {
       try {
           if (!req.body) {
@@ -43,6 +70,8 @@ module.exports = app => {
       }
   });
 
+
+// DELETE
   app.delete('/jobs/:id', (req, res) => {
       try {
           let length = jobs.length;
@@ -67,4 +96,21 @@ module.exports = app => {
       obj.isPcd,
       obj.isActive
   );
+};
+
+const extractJob = (job) => {
+  let v = job.data();
+
+  console.log(v);
+  return {
+    id: job.id,
+    name: v.name,
+    description: v.description,
+    skills: v.skills,
+    differentials: v.differentials,
+    salary: v.salary,
+    area: v.area,
+    isPcd: v.isPcd,
+    isActive: v.isActive
+  };
 };
