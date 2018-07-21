@@ -31,8 +31,17 @@ module.exports = app => {
   });
 
   app.get('/jobs/:id', async (req, res) => {
-      return res.send(jobs.find(el => el.id === req.params.id));
-      job = await extractJob(jobsCollection().doc(req.params.id));
+
+    try{
+      // return res.send(jobs.find(el => el.id === req.params.id));
+      let jobRef = await jobsCollection.doc(req.params.id);
+      let job = extractJob(jobRef);
+      console.log('Job: ' + job);
+      return res.send(job);
+    } catch(Error) {
+      return res.status('403').send('Houve um erro no resgate de informações');
+    }
+
   });
 
 

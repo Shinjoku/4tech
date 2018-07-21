@@ -1,0 +1,11 @@
+.card.job {
+  transition: 0.5s;
+  margin: 1vw 2vw;
+  border: none;
+}
+
+.card.job:hover {
+  transform: scale(1.1);
+  transition: 0.5;
+  background-color: #c5c5c5;
+}
