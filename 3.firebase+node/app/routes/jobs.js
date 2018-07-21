@@ -32,6 +32,7 @@ module.exports = app => {
 
   app.get('/jobs/:id', async (req, res) => {
       return res.send(jobs.find(el => el.id === req.params.id));
+      job = await extractJob(jobsCollection().doc(req.params.id));
   });
 
 
@@ -57,11 +58,13 @@ module.exports = app => {
           if (!req.body) {
               return res.status(403).send('Para alterar um usuário, é necessário passar algum valor');
           }
-          let index = await jobs.findIndex(job => job.id === req.params.id);
-          if (index >= 0) {
-              Object.keys(req.body).forEach(job => {
-                  jobs[index][job] = req.body[job]
-              })
+          // let index = await jobs.findIndex(job => job.id === req.params.id);
+          let job = jobsCollection.where('id', '==', req.body.id);
+
+          if (job) {
+
+              jobsCollection.doc(req.params.id).update(req.body);
+
               return res.send(`Vaga com o id ${req.params.id} alterada com sucesso`);
           }
           return res.send("nao foi encontrado vaga com esse id");
@@ -74,12 +77,14 @@ module.exports = app => {
 // DELETE
   app.delete('/jobs/:id', (req, res) => {
       try {
-          let length = jobs.length;
-          jobs.splice(jobs.findIndex(el => el.id === req.params.id), 1);
-          if (jobs.length < length) return res.send(`A vaga com o id ${req.params.id} com successo`);
+          let job = jobsCollection.doc(req.params.id);
+          if (job){
+            job.delete();
+            return res.send(`A vaga com o id ${req.params.id} foi removida com successo`);
+          }
           else return res.status(500).send(`Não foi possível deletar a vaga ${req.params.id}`);
       } catch (error) {
-          return res.status(500).send(error);
+          return res.status(500).send('Ocorreu um erro interno');
       }
   });
 
