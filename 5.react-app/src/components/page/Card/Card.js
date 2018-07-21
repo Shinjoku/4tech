@@ -2,12 +2,12 @@ import React from 'react';
 import './Card.css';
 
 const Card = (props) => (
-  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-    <div class="card job">
-      <img class="card-img-top" src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="This job location"/>
-      <div class="card-body">
-        <h5 class="card-title"><b>{props.name}</b></h5>
-        <p class="card-text">
+  <div className="col-sm-12 col-md-6 col-lg-4 mb-3">
+    <div className="card job">
+      <img className="card-img-top" src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="This job location"/>
+      <div className="card-body">
+        <h5 className="card-title"><b>{props.name}</b></h5>
+        <p className="card-text">
           <p>
             <b>ID:<br></br></b>
             { props.id }
@@ -33,8 +33,8 @@ const Card = (props) => (
             { props.salary }
           </p>
         </p>
-        <a class="btn btn-sm btn-warning" onClick={props.editCardHandler}><i class="fas fa-edit"></i></a>
-        <a class="btn btn-sm btn-danger" onClick={props.removeCardHandler}><i class="fas fa-trash-alt"></i></a>
+        <a className="btn btn-sm btn-warning" onClick={props.editCardHandler}><i className="fas fa-edit"></i></a>
+        <a className="btn btn-sm btn-danger" onClick={props.removeCardHandler}><i className="fas fa-trash-alt"></i></a>
       </div>
     </div>
   </div>

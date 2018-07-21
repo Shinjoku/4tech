@@ -5,22 +5,13 @@ import Jobs from '../JobList/JobList';
 
 class Deck extends Component {
 
+  state = {
+    deck: []
+  }
+
   constructor(props) {
     super(props);
     this.deck = [];
-
-    // Shuffle Cards
-    Jobs.forEach( job =>
-      this.deck.push(<Card
-        id={job.id}
-        name={job.name}
-        description={job.description}
-        area={job.area}
-        salary={'R$ ' + job.salary + '.00'}
-        removeCardHandler={() => this.removeCardHandler(job.id, job.name)}
-        editCardHandler={() => this.editCardHandler(job.id, job.name)}/>
-      )
-    );
   }
 
   editCardHandler = (cardId, cardName) => {
@@ -34,9 +25,28 @@ class Deck extends Component {
   }
 
   // Life Cycle functions
+
+  componentDidMount() {
+    this.setState({deck: Jobs});
+  }
+
   render() {
+
+    // Shuffle Cards
+    this.state.deck.forEach( job =>
+      this.deck.push(<Card
+        id={job.id}
+        name={job.name}
+        description={job.description}
+        area={job.area}
+        salary={'R$ ' + job.salary + '.00'}
+        removeCardHandler={() => this.removeCardHandler(job.id, job.name)}
+        editCardHandler={() => this.editCardHandler(job.id, job.name)}/>
+      )
+    );
+
     return (
-      <div class="row justify-content-md-center mt-3">
+      <div className="row justify-content-md-center mt-3">
         { this.deck }
       </div>
     );

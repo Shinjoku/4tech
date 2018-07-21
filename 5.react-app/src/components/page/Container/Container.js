@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Container = (props) => (
-  <div class="container-fluid">
+  <div className="container-fluid">
     { props.children }
   </div>
 );
