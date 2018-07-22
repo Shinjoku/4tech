@@ -16,11 +16,9 @@ class Deck extends Component {
 
   removeCardHandler = (cardId, cardName) => {
 
-    let confirm = window.confirm(`Excluir o card "${cardName}" ?`);
-    if(confirm) {
-      this.callApi('delete', cardId)
-      .then(res => {alert(`Card ${cardName} excluído com sucesso!`)})
-      .catch(err => console.log(err));
+    if(window.confirm(`Excluir o card "${cardName}" ?`)) {
+      this.deleteJob(cardId);
+      this.getJobs();
     }
     else alert('Card mantido');
   }
@@ -28,11 +26,8 @@ class Deck extends Component {
 
   // Life Cycle functions
 
-  componentDidMount() {
-
-    this.callApi('get')
-      .then(res => this.setState({deck: res}))
-      .catch(err => console.log(err));
+  componentWillMount() {
+    this.getJobs();
   }
 
   render() {
@@ -63,14 +58,25 @@ class Deck extends Component {
 
   callApi = async (verb, cardId) => {
     let id = cardId === undefined ? "" : cardId;
-    console.log(id);
-    const res = await fetch('http://localhost:8000/jobs/' + id, {method: verb});
+    const res = await fetch('/jobs/' + id, {method: verb});
     const body = res.json();
 
     if(res.status !== 200) throw Error(body.message);
 
     return body;
   }
+
+  getJobs = async () => await
+    this.callApi('get')
+      .then(res => this.setState({deck: res}))
+      .catch(err => console.log(err));
+
+
+  deleteJob = async (id) => await
+    this.callApi('delete', id)
+      .then(res => alert(`Card deletado com sucesso`))
+      .catch(err => console.log(err));
+
 }
 
 export default Deck;
