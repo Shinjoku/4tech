@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Card from '../Card/Card';
-import Jobs from '../JobList/JobList';
 
 class Deck extends Component {
 
@@ -9,33 +8,40 @@ class Deck extends Component {
     deck: []
   }
 
-  constructor(props) {
-    super(props);
-    this.deck = [];
-  }
+  // Handlers
 
   editCardHandler = (cardId, cardName) => {
     alert('O item foi atualizado!');
   }
 
   removeCardHandler = (cardId, cardName) => {
+
     let confirm = window.confirm(`Excluir o card "${cardName}" ?`);
-    if(confirm) alert(`Card ${cardName} excluído com sucesso!`);
+    if(confirm) {
+      this.callApi('delete', cardId)
+      .then(res => {alert(`Card ${cardName} excluído com sucesso!`)})
+      .catch(err => console.log(err));
+    }
     else alert('Card mantido');
   }
+
 
   // Life Cycle functions
 
   componentDidMount() {
-    this.setState({deck: Jobs});
+
+    this.callApi('get')
+      .then(res => this.setState({deck: res}))
+      .catch(err => console.log(err));
   }
 
   render() {
-
     // Shuffle Cards
-    this.state.deck.forEach( job =>
-      this.deck.push(<Card
-        id={job.id}
+    let jobsFound = [];
+
+    jobsFound = this.state.deck.map( (job, index) => (
+      <Card
+        key={index}
         name={job.name}
         description={job.description}
         area={job.area}
@@ -47,9 +53,23 @@ class Deck extends Component {
 
     return (
       <div className="row justify-content-md-center mt-3">
-        { this.deck }
+        { jobsFound }
       </div>
     );
+  }
+
+
+  // Aux functions
+
+  callApi = async (verb, cardId) => {
+    let id = cardId === undefined ? "" : cardId;
+    console.log(id);
+    const res = await fetch('http://localhost:8000/jobs/' + id, {method: verb});
+    const body = res.json();
+
+    if(res.status !== 200) throw Error(body.message);
+
+    return body;
   }
 }
 

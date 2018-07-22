@@ -4,7 +4,7 @@ import './JobForm.css';
 
 const JobForm = () => (
   <div>
-    <a className="btn btn-primary mt-3" data-toggle="collapse" href="forms" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a className="btn btn-primary mt-3" data-toggle="collapse" href="#forms" role="button" aria-expanded="false" aria-controls="collapseExample">
       Novo job
     </a>
     <div className="collapse" id="forms">
@@ -16,32 +16,32 @@ const JobForm = () => (
 
             <div className="col-sm-12 col-md-12 col-lg-12 mb-3">
               Nome:
-              <input className="field" name="name" type="text" alt="Nome" placeholder="Nome do trabalho"/>
+              <input className="field form-control" name="name" type="text" alt="Nome" placeholder="Nome do trabalho"/>
             </div>
 
             <div className="col-sm-12 col-md-12 col-lg-12 mb-3">
               Descrição:
-              <textarea className="field" name="description" placeholder="Descreva o trabalho"></textarea>
+              <textarea className="field form-control" name="description" placeholder="Descreva o trabalho"/>
             </div>
 
             <div className="col-sm-6 col-md-6 col-lg-6 mb-3">
               Habilidades necessárias:
-              <textarea className="field" name="habilities" placeholder="Habilidades técnicas"></textarea>
+              <textarea className="field form-control" name="habilities" placeholder="Habilidades técnicas"/>
             </div>
 
             <div className="col-sm-6 col-md-6 col-lg-6 mb-3">
               Diferenciais:
-              <textarea className="field" name="diferences" placeholder="Características peculiares"></textarea>
+              <textarea className="field form-control" name="diferences" placeholder="Características peculiares"/>
             </div>
 
             <div className="col-sm-6 col-md-6 col-lg-6 mb-3">
               Salário base:
-              <input type="text" className="field" name="salary" placeholder="Características peculiares"/>
+              <input type="text" className="field form-control" name="salary" placeholder="Características peculiares"/>
             </div>
 
             <div className="col-sm-6 col-md-6 col-lg-6 mb-3">
               Área:
-              <select className="field" name="area" placeholder="Área de interesse">
+              <select className="field form-control" name="area" placeholder="Área de interesse">
                 <option default value="">Selecione uma área</option>
                 <option value="Desenvolvimento">Desenvolvimento</option>
                 <option value="Design">Design</option>
@@ -50,8 +50,8 @@ const JobForm = () => (
             </div>
 
             <div className="col-sm-6 col-md-6 col-lg-6 mb-3">
+              Vaga para PCD<br/>
               <input type="checkbox" name="pcd"/>
-              Vaga para PCD
             </div>
           </div>
 

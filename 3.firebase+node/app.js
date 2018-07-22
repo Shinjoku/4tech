@@ -3,7 +3,7 @@
 
 const server = require('./config/server');
 const express = require('express');
-const port = 3000;
+const port = 8000;
 
 server.use('/vjobs', express.static(__dirname + '/app/static'));
 

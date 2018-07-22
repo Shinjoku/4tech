@@ -11,26 +11,32 @@ module.exports = app => {
 // GET
   app.get('/jobs', async (req, res) => {
 
-      try {
+    // Log for the server
+    console.log('GET /jobs');
 
-        // Query para os jobs
-        const docs = await jobsCollection.get();
-        let jobs = [];
+    try {
 
-        // Leva os jobs para um vetor que será exibido ao user
-        docs.forEach(doc => {
-          jobs.push(extractJob(doc));
-        });
+      // Query para os jobs
+      const docs = await jobsCollection.get();
+      let jobs = [];
 
-        return res.send(jobs);
+      // Leva os jobs para um vetor que será exibido ao user
+      docs.forEach(doc => {
+        jobs.push(extractJob(doc));
+      });
 
-      } catch(error) {
+      return res.send(jobs);
 
-        return res.status(500).send('Error');
-      }
+    } catch(error) {
+
+      return res.status(500).send('Error');
+    }
   });
 
   app.get('/jobs/:id', async (req, res) => {
+
+    // Log for the server
+    console.log('GET /jobs/' + req.params.id);
 
     try{
       // return res.send(jobs.find(el => el.id === req.params.id));
@@ -47,54 +53,62 @@ module.exports = app => {
 
 // POST
   app.post('/jobs', async (req, res) => {
-      try {
 
-        // Query para cadastrar o JSON recebido
-        const fbReturn = await jobsCollection.doc().set(req.body);
+    // Log for the server
+    console.log('POST /jobs');
 
-        if (fbReturn) return res.send('Succesfully added!');
-        else throw Error;
+    try {
 
-      } catch (error) {
-          return res.status(500).send('Eroooooooow');
-      }
+      // Query para cadastrar o JSON recebido
+      const fbReturn = await jobsCollection.doc().set(req.body);
+
+      if (fbReturn) return res.send('Succesfully added!');
+      else throw Error;
+
+    } catch (error) {
+      return res.status(500).send('Eroooooooow');
+    }
   });
 
 
 // PUT
   app.put('/jobs/:id', async (req, res) => {
-      try {
-          if (!req.body) {
-              return res.status(403).send('Para alterar um usuário, é necessário passar algum valor');
-          }
-          // let index = await jobs.findIndex(job => job.id === req.params.id);
-          let job = jobsCollection.where('id', '==', req.body.id);
-
-          if (job) {
-
-              jobsCollection.doc(req.params.id).update(req.body);
-
-              return res.send(`Vaga com o id ${req.params.id} alterada com sucesso`);
-          }
-          return res.send("nao foi encontrado vaga com esse id");
-      } catch (error) {
-          return res.status(500).send(error);
+    try {
+      if (!req.body) {
+          return res.status(403).send('Para alterar um usuário, é necessário passar algum valor');
       }
+      // let index = await jobs.findIndex(job => job.id === req.params.id);
+      let job = jobsCollection.where('id', '==', req.body.id);
+
+      if (job) {
+
+          jobsCollection.doc(req.params.id).update(req.body);
+
+          return res.send(`Vaga com o id ${req.params.id} alterada com sucesso`);
+      }
+      return res.send("nao foi encontrado vaga com esse id");
+    } catch (error) {
+      return res.status(500).send(error);
+    }
   });
 
 
 // DELETE
   app.delete('/jobs/:id', (req, res) => {
-      try {
-          let job = jobsCollection.doc(req.params.id);
-          if (job){
-            job.delete();
-            return res.send(`A vaga com o id ${req.params.id} foi removida com successo`);
-          }
-          else return res.status(500).send(`Não foi possível deletar a vaga ${req.params.id}`);
-      } catch (error) {
-          return res.status(500).send('Ocorreu um erro interno');
-      }
+
+    // Log for the server
+    console.log('DELETE /jobs/' + req.params.id);
+
+    try {
+        let job = jobsCollection.doc(req.params.id);
+        if (job){
+          job.delete();
+          return res.send(`A vaga com o id ${req.params.id} foi removida com successo`);
+        }
+        else return res.status(500).send(`Não foi possível deletar a vaga ${req.params.id}`);
+    } catch (error) {
+        return res.status(500).send('Ocorreu um erro interno');
+    }
   });
 
 
@@ -115,7 +129,6 @@ module.exports = app => {
 const extractJob = (job) => {
   let v = job.data();
 
-  console.log(v);
   return {
     id: job.id,
     name: v.name,

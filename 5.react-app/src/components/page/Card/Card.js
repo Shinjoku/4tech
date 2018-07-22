@@ -9,14 +9,6 @@ const Card = (props) => (
         <h5 className="card-title"><b>{props.name}</b></h5>
         <p className="card-text">
           <p>
-            <b>ID:<br></br></b>
-            { props.id }
-          </p>
-          <p>
-            <b>Nome:<br></br></b>
-            { props.name }
-          </p>
-          <p>
             <b>Descrição:<br></br></b>
             { props.description }
           </p>
