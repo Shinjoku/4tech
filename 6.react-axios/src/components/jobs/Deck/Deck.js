@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import axios from 'axios';
 
 import Card from '../Card/Card';
 import Loading from '../../navigation/Loading/Loading';
@@ -36,7 +36,7 @@ class Deck extends Component {
 
   render() {
 
-    if(this.state.isLoading == true){
+    if(this.state.isLoading === true){
         return ( <Loading/> );
     }
     // Shuffle Cards
@@ -80,14 +80,18 @@ class Deck extends Component {
   }
 
   getJobs = async () => await
-    this.callApi('get')
-      .then(res => { for(let i = 0; i < 1000; i++) this.setState({deck: res, isLoading: false})})
+    // this.callApi('get')
+    //   .then(res => { for(let i = 0; i < 1000; i++) this.setState({deck: res, isLoading: false})})
+    //   .catch(err => console.log(err));
+
+    axios.get('/jobs')
+      .then(res => this.setState({deck: res.data, isLoading: false}))
       .catch(err => console.log(err));
 
 
   deleteJob = async (id) => await
-    this.callApi('delete', id)
-      .then(res => alert(`Card deletado com sucesso`))
+    axios.delete('/jobs/' + id)
+      .then(res => window.alert('Card removido'))
       .catch(err => console.log(err));
 
 }

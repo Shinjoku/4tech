@@ -1,0 +1,5 @@
+1. Porque arrow functions funcionam no botão remove mas function() não?
+2. Animações de fadeIn(Mount) e fadeOut(Unmount) para os componentes (Uso dos LifeCycle methods)?
+3. Erro sobre key do Bruno, porque key={index} não está funcionando?
+4. O bypass (CORS) é certo?
+

@@ -8,7 +8,7 @@ const port = 8000;
 server.use('/vjobs', express.static(__dirname + '/app/static'));
 
 server.get('/', async (req, res) => {
-    return res.redirect('http://localhost:3000/vjobs');
+    return res.redirect(`http://localhost:${port}/vjobs`);
 });
 
 server.listen(port, () => {
