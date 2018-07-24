@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import Card from '../Card/Card';
 import Loading from '../../navigation/Loading/Loading';
+import JobForm from '../JobForm/JobForm';
+import Collapse from '../../hoc/Collapse/Collapse';
 
 
 class Deck extends Component {
@@ -14,6 +16,13 @@ class Deck extends Component {
 
   // Handlers
 
+  addItemToDeck = (newItem) => {
+    let currentJobs = this.state.deck;
+
+    currentJobs.push(newItem);
+    this.setState({jobs: currentJobs});
+  }
+
   editCardHandler = (cardId, cardName) => {
     alert('O item foi atualizado!');
   }
@@ -22,7 +31,6 @@ class Deck extends Component {
 
     if(window.confirm(`Excluir o card "${cardName}" ?`)) {
       this.deleteJob(cardId);
-      this.getJobs();
     }
     else alert('Card mantido');
   }
@@ -60,8 +68,13 @@ class Deck extends Component {
     );
 
     return (
-      <div className="row justify-content-md-center mt-3">
-        { jobsFound }
+      <div>
+        <Collapse>
+          <JobForm addToDeck={this.addItemToDeck}/>
+        </Collapse>
+        <div className="row justify-content-md-center mt-3">
+          { jobsFound }
+        </div>
       </div>
     );
   }
@@ -80,10 +93,6 @@ class Deck extends Component {
   }
 
   getJobs = async () => await
-    // this.callApi('get')
-    //   .then(res => { for(let i = 0; i < 1000; i++) this.setState({deck: res, isLoading: false})})
-    //   .catch(err => console.log(err));
-
     axios.get('/jobs')
       .then(res => this.setState({deck: res.data, isLoading: false}))
       .catch(err => console.log(err));
@@ -91,7 +100,13 @@ class Deck extends Component {
 
   deleteJob = async (id) => await
     axios.delete('/jobs/' + id)
-      .then(res => window.alert('Card removido'))
+      .then(res => {
+        let vagas = this.state.deck;
+        const indexRemoved = vagas.findIndex(item => item.id === id);
+
+        vagas.splice(indexRemoved, 1);
+        this.setState({deck: vagas});
+      })
       .catch(err => console.log(err));
 
 }

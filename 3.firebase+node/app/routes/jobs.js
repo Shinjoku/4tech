@@ -57,17 +57,10 @@ module.exports = app => {
     // Log for the server
     console.log('POST /jobs');
 
-    try {
-
-      // Query para cadastrar o JSON recebido
-      const fbReturn = await jobsCollection.doc().set(req.body);
-
-      if (fbReturn) return res.send('Succesfully added!');
-      else throw Error;
-
-    } catch (error) {
-      return res.status(500).send('Eroooooooow');
-    }
+    // Query to register the received JSON
+    return await jobsCollection.add(req.body)
+      .then(ref => res.send(ref.id))
+      .catch(error => res.status(500).send('Eroooooooow'));
   });
 
 
