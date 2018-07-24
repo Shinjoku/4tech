@@ -40,7 +40,7 @@ module.exports = app => {
 
     try{
       // return res.send(jobs.find(el => el.id === req.params.id));
-      let jobRef = await jobsCollection.doc(req.params.id);
+      let jobRef = await jobsCollection.doc(req.params.id).get();
       let job = extractJob(jobRef);
       console.log('Job: ' + job);
       return res.send(job);
