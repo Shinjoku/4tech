@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Card.css';
 
 class Card extends Component{
@@ -6,7 +7,7 @@ class Card extends Component{
   render = () => (
       <div className="col-sm-12 col-md-6 col-lg-4 mb-3">
           <div className="card job">
-            <img className="card-img-top" src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="This job location"/>
+            <Link to={'/job/' + this.props.id }><img className="card-img-top" src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="This job location"/></Link>
             <div className="card-body">
               <h5 className="card-title"><b>{this.props.name}</b></h5>
               <p className="card-text">

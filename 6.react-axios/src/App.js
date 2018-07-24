@@ -5,6 +5,7 @@ import Header from './components/navigation/Header/Header';
 import Container from './components/page/Container/Container';
 import Deck from './components/jobs/Deck/Deck';
 import About from './components/About/About';
+import SingleJob from './components/jobs/SingleJob/SingleJob';
 
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact path='/' component={ Deck }></Route>
             <Route path='/vagas' component={ Deck }></Route>
             <Route path='/about' component={ About }></Route>
+            <Route path='/job/:id' component={ SingleJob }></Route>
           </Switch>
         </Container>
       </div>
