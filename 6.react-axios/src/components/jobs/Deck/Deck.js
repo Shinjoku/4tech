@@ -55,6 +55,7 @@ class Deck extends Component {
 
             <Card
               key={index}
+              id={job.id}
               name={job.name}
               description={job.description}
               area={job.area}
@@ -81,16 +82,6 @@ class Deck extends Component {
 
 
   // Aux functions
-
-  callApi = async (verb, cardId) => {
-    let id = cardId === undefined ? "" : cardId;
-    const res = await fetch('/jobs/' + id, {method: verb});
-    const body = res.json();
-
-    if(res.status !== 200) throw Error(body.message);
-
-    return body;
-  }
 
   getJobs = async () => await
     axios.get('/jobs')

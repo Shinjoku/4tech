@@ -1,0 +1,17 @@
+html, body {
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.job-highlight {
+    padding: 80px;
+}
+
+.highlight-img {
+    background-image: url("https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: none;
+    height: 80vh;
+    width: 100%;
+}

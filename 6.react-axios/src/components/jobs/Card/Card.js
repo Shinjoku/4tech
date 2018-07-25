@@ -12,20 +12,8 @@ class Card extends Component{
               <h5 className="card-title"><b>{this.props.name}</b></h5>
               <p className="card-text">
                 <p>
-                  <b>Descrição:<br/></b>
-                  { this.props.description }
-                </p>
-                <p>
                   <b>Área:<br/></b>
                   { this.props.area }
-                </p>
-                <p>
-                  <b>Habilidades desejadas:<br/></b>
-                  { this.props.skills }
-                </p>
-                <p>
-                  <b>Salário:<br/></b>
-                  { this.props.salary }
                 </p>
               </p>
               <a className="btn btn-sm btn-warning" onClick={this.props.editCardHandler}><i className="fas fa-edit"></i></a>
