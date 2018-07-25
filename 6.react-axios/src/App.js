@@ -16,7 +16,6 @@ class App extends Component {
         <Container>
           <Switch>
             <Route exact path='/' component={ Deck }></Route>
-            <Route path='/vagas' component={ Deck }></Route>
             <Route path='/about' component={ About }></Route>
             <Route path='/job/:id' component={ SingleJob }></Route>
           </Switch>
