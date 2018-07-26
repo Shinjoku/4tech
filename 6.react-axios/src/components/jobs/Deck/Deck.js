@@ -23,10 +23,6 @@ class Deck extends Component {
     this.setState({jobs: currentJobs});
   }
 
-  editCardHandler = (cardId, cardName) => {
-    alert('O item foi atualizado!');
-  }
-
   removeCardHandler = (cardId, cardName) => {
 
     if(window.confirm(`Excluir o card "${cardName}" ?`)) {
@@ -61,11 +57,9 @@ class Deck extends Component {
               area={job.area}
               salary={'R$ ' + job.salary + '.00'}
               removeCardHandler={() => this.removeCardHandler(job.id, job.name)}
-              editCardHandler={() => this.editCardHandler(job.id, job.name)}
             />
-
         )
-    }
+      }
     );
 
     return (

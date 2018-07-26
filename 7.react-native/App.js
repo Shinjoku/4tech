@@ -18,7 +18,7 @@ export default class App extends Component {
       const separatorStyle = {
           flexGrow: 1,
           height: 5,
-          backgorundColor: '#f4f4f4'
+          backgroundColor: '#f4f4f4'
       };
 
       return (
