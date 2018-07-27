@@ -87,7 +87,7 @@ class SingleJob extends Component {
       );
     } 
     else {
-      content = <JobForm data={this.state.job}/>;
+      content = <JobForm data={this.state.job} editJob={this.editJob}/>;
     }
 
     return (

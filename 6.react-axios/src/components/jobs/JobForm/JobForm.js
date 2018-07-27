@@ -49,10 +49,9 @@ class JobForm extends Component {
     // Same as in POST data handler
     let thisJob = {...this.state.newJob};
     thisJob['id'] = this.state.newJob.id;
-    console.log('ID DO JOB MODIFICADO: ' + thisJob.id);
 
     axios.put('/jobs/' + thisJob.id, thisJob)
-      .then(res => console.log(res))
+      .then(res => this.props.editJob())
       .catch(err => console.log(err));
 
     event.preventDefault();
