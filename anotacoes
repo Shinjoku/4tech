@@ -4,4 +4,6 @@
 3. Erro sobre key do Bruno, porque key={index} não está funcionando?
 4. O bypass (CORS) é certo?
 	- Não, pois o bypass causa uma grande falha de segurança
+5. Alguma razão específica para static no arquivo JobList?
+
 
