@@ -2,6 +2,7 @@
 
 
 const Job = require('../../model/job.js');
+const auth = require('../../config/security/tokenValidator');
 
 module.exports = app => {
 
@@ -52,7 +53,7 @@ module.exports = app => {
 
 
 // POST
-  app.post('/jobs', async (req, res) => {
+  app.post('/jobs', auth, async (req, res, next) => {
 
     // Log for the server
     console.log('POST /jobs');

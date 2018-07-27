@@ -5,5 +5,6 @@
 4. O bypass (CORS) é certo?
 	- Não, pois o bypass causa uma grande falha de segurança
 5. Alguma razão específica para static no arquivo JobList?
-
+6. Existe alguma proteção nativa do Express para escape de caracteres ou é necessário implementar uma validação ou usar o express validator?
+7. Com a inclusão do método representado pelo Auth, é possível dizer que pode-se encadear métodos para serem executados através de cada next?
 
