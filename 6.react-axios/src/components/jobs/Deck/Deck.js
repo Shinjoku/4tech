@@ -9,13 +9,16 @@ import Collapse from '../../hoc/Collapse/Collapse';
 
 class Deck extends Component {
 
+  // Deck       represents the collection of cards that will be loading
+  // IsLoading  represents if the Promise has been answered yet
   state = {
     deck: [],
     isLoading: true
   }
 
-  // Handlers
+  // HANDLERS METHODS
 
+  // Includes a new card on the deck for every submit on the form
   addItemToDeck = (newItem) => {
     let currentJobs = this.state.deck;
 
@@ -23,6 +26,7 @@ class Deck extends Component {
     this.setState({jobs: currentJobs});
   }
 
+  // Removes a selected card for every delete on the Deck
   removeCardHandler = (cardId, cardName) => {
 
     if(window.confirm(`Excluir o card "${cardName}" ?`)) {
@@ -32,7 +36,7 @@ class Deck extends Component {
   }
 
 
-  // Life Cycle functions
+  // LIFECYCLE METHODS
 
   componentDidMount() {
     this.getJobs();
@@ -65,7 +69,9 @@ class Deck extends Component {
     return (
       <div>
         <Collapse>
-          <JobForm addToDeck={this.addItemToDeck}/>
+          <JobForm
+          addToDeck={this.addItemToDeck}
+          type='put'/>
         </Collapse>
         <div className="row justify-content-md-center mt-3">
           { jobsFound }
@@ -75,7 +81,7 @@ class Deck extends Component {
   }
 
 
-  // Aux functions
+  // AUX METHODS
 
   getJobs = async () => await
     axios.get('/jobs')

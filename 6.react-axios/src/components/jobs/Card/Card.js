@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import './Card.css';
 
+
+// Shows a few job infos
 class Card extends Component{
 
   render = () => (

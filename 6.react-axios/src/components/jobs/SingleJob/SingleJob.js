@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './SingleJob.css';
 
+import './SingleJob.css';
+import JobForm from '../JobForm/JobForm';
+
+
+// Shows and allows the user to edit all the job fields
 class SingleJob extends Component {
 
   constructor(props) {
     super(props);
+
+    // Job        represents the job that must be shown
+    // exclusion  represents if the card has been deleted
+    // editing    represents the edit-mode state
     this.state = {
       job: {},
       exclusion: false,
@@ -14,17 +22,10 @@ class SingleJob extends Component {
     }
   }
 
-  componentDidMount(){
-
-    axios.get('/jobs/' + this.props.match.params.id )
-      .then(res => this.setState({ job: res.data }))
-      .catch(err => console.log(err));
-  }
-
-  // Aux Functions
+  // AUX METHODS
 
   editJob = () => {
-    this.setState({ editing: true });
+    this.setState({ editing: !this.state.editing });
   }
 
   deleteJob = (id) => {
@@ -40,20 +41,28 @@ class SingleJob extends Component {
     }
   }
 
+  // LIFECYCLE METHODS
+
+  componentDidMount(){
+
+    axios.get('/jobs/' + this.props.match.params.id )
+      .then(res => this.setState({ job: res.data }))
+      .catch(err => console.log(err));
+  }
+
   render = () => {
+
+    let content;
+
+    // If the card has been deleted, the user must return to the main page
     if(this.state.exclusion)
       return <Link className="btn btn-sm btn-info" to='/'>Voltar para a página principal</Link>
 
-    return (
-      <div>
-        <div className="highlight-img"></div>
-        <section className="job-highlight">
-            
-            <h1 className="mb-0 text-center">{this.state.job.name}</h1>
-            <p className="text-center">
-              <a className="title-options btn btn-sm btn-warning" onClick={() => this.editJob()}><i className="fas fa-edit"></i></a>
-              <a className="title-options btn btn-sm btn-danger" onClick={() => this.deleteJob(this.state.job.id)}><i className="fas fa-trash-alt"></i></a>
-            </p>
+    // If edit-mode is on, the content should be a form.
+    //  Otherwise, it'll be a simple exhibition of the job data
+    if(!this.state.editing) {
+      content = (
+        <div>
           <p>
             <b>Descrição:<br/></b>
             { this.state.job.description }
@@ -74,7 +83,24 @@ class SingleJob extends Component {
             <b>Salário:<br/></b>
             { this.state.job.salary }
           </p>
-        
+        </div>
+      );
+    } 
+    else {
+      content = <JobForm data={this.state.job}/>;
+    }
+
+    return (
+      <div>
+        <div className="highlight-img"></div>
+        <section className="job-highlight">
+            
+            <h1 className="mb-0 text-center">{this.state.job.name}</h1>
+            <p className="text-center">
+              <a className="title-options btn btn-sm btn-warning" onClick={() => this.editJob()}><i className="fas fa-edit"></i></a>
+              <a className="title-options btn btn-sm btn-danger" onClick={() => this.deleteJob(this.state.job.id)}><i className="fas fa-trash-alt"></i></a>
+            </p>
+            { content }
         </section>
       </div>
     )

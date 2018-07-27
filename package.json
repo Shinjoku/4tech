@@ -3,7 +3,7 @@
   "description": "Atividade desenvolvida pela Venturus, que engloba um servidor Express, comunicando com um banco de dados Firebase e fornecendo dados para um client React",
   "version": "3.5.0",
   "scripts": {
-    "client": "cd 5.react-app && npm start",
+    "client": "cd 6.react-axios && yarn start",
     "server": "cd 3.firebase+node && nodemon app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },

@@ -1,8 +1,11 @@
 import React from 'react';
-import logo from '../../../assets/images/logo-h-vjobs.png';
 import { Link } from 'react-router-dom';
-import './Header.css';
 
+import './Header.css';
+import logo from '../../../assets/images/logo-h-vjobs.png';
+
+
+// Navbar with route redirectioning
 const Header = () => (
   <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <a className="navbar-brand" href="/"><img src={logo} style={{width: "100px", height: "50px"}} alt="Logo Venturus"/></a>

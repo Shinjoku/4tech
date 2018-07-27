@@ -79,7 +79,7 @@ module.exports = app => {
 
           return res.send(`Vaga com o id ${req.params.id} alterada com sucesso`);
       }
-      return res.send("nao foi encontrado vaga com esse id");
+      return res.send("Nao foi encontrada uma vaga com esse id");
     } catch (error) {
       return res.status(500).send(error);
     }
