@@ -29,8 +29,14 @@ class Deck extends Component {
   // Removes a selected card for every delete on the Deck
   removeCardHandler = (cardId, cardName) => {
 
+    const axiosConfig = {
+      headers: {
+        'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+      }
+    }
+
     if(window.confirm(`Excluir o card "${cardName}" ?`)) {
-      this.deleteJob(cardId);
+      this.deleteJob(cardId, axiosConfig);
     }
     else alert('Card mantido');
   }
@@ -89,8 +95,8 @@ class Deck extends Component {
       .catch(err => console.log(err));
 
 
-  deleteJob = async (id) => await
-    axios.delete('/jobs/' + id)
+  deleteJob = async (id, axiosConfig) => await
+    axios.delete('/jobs/' + id, axiosConfig)
       .then(res => {
         let vagas = this.state.deck;
         const indexRemoved = vagas.findIndex(item => item.id === id);
